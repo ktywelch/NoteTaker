@@ -17,4 +17,10 @@ router.get("/notes", (req,res) => {
     console.log("whaat");
  
  })
+
+ router.get("/assets/css/styles.css", (req,res) => {
+   res.sendFile(path.join(__dirname, "../public/assets/css/styles.css"));
+   console.log("whaat");
+
+})
 module.exports = router;

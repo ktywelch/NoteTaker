@@ -13,32 +13,40 @@ const db = path.join(__dirname, "../db/db.json");
 
 // /api/notes
 router.get("/notes", (req, res) => {
-    console.log(db);
+    //console.log(db);
     fs.readFile(db, "utf8", (err, data) => {
       if (err) throw err;
-      console.log(data);
+      //console.log(data);
       return res.json(JSON.parse(data));
    
     });
   });
 
 
-router.get("/notes/:id", (req, res) => {
-    //console.log(req.params.routename); 
+router.delete("/notes/:id", (req, res) => {   
+    //console.log("params",req.params.id); 
     //res.json({msg: "success"});
-    fs.readFile('../db/db.json','utf8', (err,data) => {
+    fs.readFile(db,'utf8', (err,data) => {
         if (err) throw err;
-        //console.log(data);
+        
         const allNotes = JSON.parse(data);
         const search = req.params.id;
 
         for (let i = 0; i < allNotes.length; i++) {
-            if (allNotes[i].routeName === search) {
-                return res.json(allNotes[i])
+            if (allNotes[i].id === search) {
+                
+                let removed = allNotes.splice(i, 1) 
+                //console.log("remove",removed)
+                //return res.json(allNotes[i])
+                fs.writeFile(db, JSON.stringify(allNotes), (err) => {
+                    if (err) throw err;
+                    return res.json({msg: `removed ${removed}`})
+                  });
+                
             }
         }
         return res.json({
-            msg: "the character you are searching for does not exist",
+            msg: "the note does not exist",
             error: `attempted route: ${req.params.id}`
         })
     })
