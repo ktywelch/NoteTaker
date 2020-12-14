@@ -12,6 +12,9 @@
     "express": "^4.16.4",
     "nanoid": "^3.1.20"
   },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
   "keywords": [],
   "description": ""
 }
