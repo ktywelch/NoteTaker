@@ -4,7 +4,8 @@ const fs = require('fs')
 const path = require("path");
 const db = path.join(__dirname, "../db/db.json");
 
-// Createing a delnotes promise that will delete the note using promise
+// Createing a delnotes promise that will delete the note using promise this did not work ... 
+// but maybe can figure out how to make it work ....
 const delNotes = async(search) => {
 return new Promise((res,rjct) => {
     fs.readFile(db,'utf8', (err,data) => {

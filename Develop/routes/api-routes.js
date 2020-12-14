@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require("path");
 const db = path.join(__dirname, "../db/db.json");
 
-// Createing a delnotes promise that will delete the note using promise
+// Createing a delnotes promise that will delete the note using promise - did not work will try to figure it out
 const delNotes = async(search) => {
 return new Promise((res,rjct) => {
     fs.readFile(db,'utf8', (err,data) => {
@@ -56,21 +56,6 @@ router.delete("/notes/:id", (req, res) => {
      })
     })    
 
-    // delNotes(search)
-    // .then(checkDel => {
-
-    //     console.log("returned from del",checkDel)
-    //     if (checkDel[0]){ 
-        
-    //     return res.json({msg: `removed ${removed}`})
-    //     } else {
-    //     return res.json({
-    //         msg: "the note does not exist",
-    //         error: `attempted route: ${search}`
-    //        })
-    //     }
-      
-    // })
 
 router.post('/notes', (req,res) => {
     let noteid;
