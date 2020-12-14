@@ -1,67 +1,66 @@
-![](./Assets/images/)
+![](./images/notetaker.jpg)
+# NoteTaker
 
-The Employee-Summary application allows a user to create an engineering team comprising of one Manager, as many interns and developers as needed and  Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person.
+The NoteTaker application allows a user to read, write, change and save notes. This application uses  express.js back end, saves and retrieves the note data from a JSON file.
 
-[Empployee-Summary Application Link]((not applicable this is a JS App))
+The application has been deployed to Heroku.
 
-[Empployee-Summary application can be found on repository Employee-Summary](https://github.com/ktywelch/Employee-Summary)
+[NoteTaker Application on Heroku](https://notetaker-ktywelch-2020.herokuapp.com/)
+
+[NoteTaker application can be found on github repository ](https://github.com/ktywelch/NoteTaker)
 
 ## Table of contents
-* [Title](#Title)
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [Technologies](#Technologies)
 * [Contributions](#Contributions)
-* [Test](#Test)
 * [License](#License)
 ## Installation
 The installation pocess is a download of git source, using npm install to install required modules based on the package.json file included in the same directory as the application.
 
 * Download the Application from github (see link above)
 * change to the Developer Directory 
-* run "npm install" to install the required modules 
+* run "npm install" to install the required modules
+* to start the server on a local system run one of the following from the Develop directory:
+    * if nodemon is available "nodemon server.js"
+    * if nodemon is not availaable "node server.js"
 
 ## Useage
-Users would use this program to input the employee details for Manager, Developers and Interns on a development team. Where there is only one manager but as many developers and interns as neede. The application generates a team.html file that contains the details of the team.
+Users will be able to Add, Delete and Change exisiting notes. 
 
-* Change to the Developer directory in the download location "cd Developer"
-* Start the program by running "node app.js"
-* Answer the questions for each employee and when completed reply n for when asked if there are additional employees
+* If intalled locally start use the link:
+    * [localhost:800](http://localhost:8000)
+    * [https://notetaker-ktywelch-2020.herokuapp.com/](https://notetaker-ktywelch-2020.herokuapp.com/)
+* Click on the "GetStarted" button
+* The existing notes will be seen on the column on the left side
+* To open the note click on the cell containing the note
+* Click on the upper right hand pencil to edit or add a note
+* To save the note click on the upper left icon that resembles an older disk to save - this icon will only appear if a note has been updated or if the new note contains both title and text.
+![](./images/NoteTakerIcon.gif)
+* Afer a note has been saved (applies to changed and new) the note will be added to the end of list of notes on the left column
+* Post save on the left column the user will have a new Note screen
+* To delete a note click on the trash can icon with the note
 
-![](./Assets/images/myteam.gif)
-
-* Once there are no more employees the output is automatically generated and can be found in the relative path ./output/team.html
-
-![](./Assets/images/my-team.jpg)
-
-* There can only be one manager on the team, once a manager role is selected the selection list adjusts to Engineer and Intern Only.
-* There following are the criteria:
-    * The name so that users have to have a minimum of First and Last Name
-    * The email has limited characters an @ sign and 2-3 numbers of letters after the digit
-    * The room number is required to have a building numer with a "-" and a room number
+![](./images/notetaker.gif)
 
 ## Technologies
 The application was created using several opensource technologies used in developing javascript code.
 
 * VSCode
 * node.js
-* jest (testing solution)
-* npm and modules util,inquirer,fs
+* npm and modules express,fs,nanoid
 * bootstrap for styling
 
 ## Contributions
 Recognizing contributors and sites that helped in development:
 
-* Lauren Hutchinson - Peer Review
-* Sam Ayler - Peer Review
-* Vincent Gines - Peer Review
-
-## Test
-to test the components please run "npm test" from the Developer directory
+* Lauren Hutchinson 
+* Sam Ayler 
+* Vincent Gines 
+* Lucah Endicott
 
 ## License
 MIT
-
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
