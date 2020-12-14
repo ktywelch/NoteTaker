@@ -4,6 +4,7 @@ let noteIdLoc;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+let noteChanged;
 
 if (window.location.pathname === '/notes') {
   noteIdLoc = document.querySelector('.note-id');
@@ -55,6 +56,7 @@ const deleteNote = (id) =>
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
+  
   if (activeNote.id) {
     noteIdLoc.setAttribute('readonly', true)
     //noteTitle.setAttribute('readonly', true);
@@ -67,6 +69,8 @@ const renderActiveNote = () => {
     noteTitle.value = '';
     noteText.value = '';
   }
+  
+
 };
 
 const handleNoteSave = () => {
@@ -75,7 +79,7 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
+  saveNote(newNote).then((resp) => {
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -89,14 +93,14 @@ const handleNoteDelete = (e) => {
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
-  //console.log("note",note,noteId)
+  console.log("note",note,noteId)
 
   if (activeNote.id === noteId) {
     activeNote = {};
   }
 
   deleteNote(noteId).then(() => {
-    console.log("note deleted");
+    activeNote = {};
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -107,14 +111,16 @@ const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
   renderActiveNote();
+  //added this so that either new note or changed note after save will return a blank new note
+  activeNote = {};
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
-  activeNote = {};
   renderActiveNote();
 };
 
+//need both a title value and a test vlaue to show the save button
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     hide(saveNoteBtn);
@@ -129,7 +135,6 @@ const renderNoteList = async (notes) => {
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
-
   let noteListItems = [];
 
   // Returns HTML element with or without a delete button
@@ -156,7 +161,6 @@ const renderNoteList = async (notes) => {
 
       liEl.append(delBtnEl);
     }
-
     return liEl;
   };
 
@@ -167,7 +171,6 @@ const renderNoteList = async (notes) => {
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-
     noteListItems.push(li);
   });
 

@@ -81,25 +81,22 @@ router.post('/notes', (req,res) => {
     
      let formNoteID = req.body.id;
 
-     console.log("jdkaldfjald",formNoteID);
-     //if there is a form id remove it 
-
+  
+     //if there is a form id remove it from the array
             if(formNoteID){
               for (let i = 0; i < allNotes.length; i++) {
                 if (allNotes[i].id === formNoteID) {
                  allNotes.splice(i, 1) 
-                    // fs.writeFile(db, JSON.stringify(allNotes), (err) => {
-                    //     if (err) throw err;
-                    //     res.json({msg: 'note removed from database'})
-                    //   });
-                  console.log("yere")      
                  }
                }
-
          }     
 
     // note is not in the array 
+          if (formNoteID){ noteid =  formNoteID //using same id although I now think the issue is with the render
+        } else {
           noteid = nanoid(10); //some random number generator; 
+          }
+          console.log("FormID",formNoteID,"noteid",noteid);
             newNote = {
                 "id": noteid,
                 "title": req.body.title,
@@ -109,9 +106,10 @@ router.post('/notes', (req,res) => {
 
             fs.writeFile(db, JSON.stringify(allNotes), (err) => {
                 if (err) throw err;
-                res.json({msg: 'new note added to database'})
+             
             });
     })
+    res.json({msg: 'new note added to database'})
 })
 
     
