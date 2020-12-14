@@ -25,6 +25,8 @@ return new Promise((res,rjct) => {
 })
 }
     
+
+
 // /api/notes
 router.get("/notes", (req, res) => {
     //console.log(db);
@@ -40,80 +42,66 @@ router.get("/notes", (req, res) => {
 router.delete("/notes/:id", (req, res) => { 
     console.log(req.params);  
     const search = req.params.id;
-    fs.readFile(db,'utf8', (err,data) => {
-        if (err) throw err;
-        const allNotes = JSON.parse(data);
-        for (let i = 0; i < allNotes.length; i++) {
-            if (allNotes[i].id === search) {
-                let removed = allNotes.splice(i, 1) 
-                fs.writeFile(db, JSON.stringify(allNotes), (err) => {
-                    if (err) throw err;
-                    res.json({msg: 'note removed from database'})
-                  });
-                
-            }
-        }
-     })
-    })    
+    delNotes(search)
+    .then(checkDel => {
 
-    // delNotes(search)
-    // .then(checkDel => {
-
-    //     console.log("returned from del",checkDel)
-    //     if (checkDel[0]){ 
+        console.log("returned from del",checkDel)
+        if (checkDel[0]){ 
         
-    //     return res.json({msg: `removed ${removed}`})
-    //     } else {
-    //     return res.json({
-    //         msg: "the note does not exist",
-    //         error: `attempted route: ${search}`
-    //        })
-    //     }
+        return res.json({msg: `removed ${removed}`})
+        } else {
+        return res.json({
+            msg: "the note does not exist",
+            error: `attempted route: ${search}`
+           })
+        }
       
-    // })
+    })
+    .catch(err => console.log(err))
+})
 
 router.post('/notes', (req,res) => {
     let noteid;
-    let allNotes;
+    console.log(req.body)
     fs.readFile(db,'utf8', (err,data) => {
-    if (err) throw err;
-     allNotes = JSON.parse(data);
-    
-     let formNoteID = req.body.id;
-
-     console.log("jdkaldfjald",formNoteID);
-     //if there is a form id remove it 
-
-            if(formNoteID){
-              for (let i = 0; i < allNotes.length; i++) {
-                if (allNotes[i].id === formNoteID) {
-                 allNotes.splice(i, 1) 
-                    // fs.writeFile(db, JSON.stringify(allNotes), (err) => {
-                    //     if (err) throw err;
-                    //     res.json({msg: 'note removed from database'})
-                    //   });
-                  console.log("yere")      
-                 }
-               }
-
-         }     
-
-    // note is not in the array 
+     if (err) throw err;
+      const allNotes = JSON.parse(data);
+    let formNoteID = req.body.id;
+    console.log(formNoteID);
+    if(formNoteID){
+        //noteid = formNoteID;
+        delNotes(noteid)  
+        .then(checkDel => {
+            console.log("returned from del",checkDel)
+            if (checkDel[0]){ 
+            return res.json({msg: `removed ${removed}`})
+            } else {
+            return res.json({
+                msg: "the note does not exist",
+                error: `attempted route: ${req.params.id}`
+               })
+            }
+          
+        })
+        .catch(err => console.log(err))
+        
+    }   
           noteid = nanoid(10); //some random number generator; 
+    
             newNote = {
                 "id": noteid,
                 "title": req.body.title,
                 "text": req.body.text,
             };
+
             allNotes.push(newNote); 
 
             fs.writeFile(db, JSON.stringify(allNotes), (err) => {
                 if (err) throw err;
                 res.json({msg: 'new note added to database'})
             });
-    })
-})
+            })
 
-    
+})
 
 module.exports =router;

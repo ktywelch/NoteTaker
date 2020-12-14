@@ -1,10 +1,12 @@
 let noteTitle;
 let noteText;
+let noteIdLoc;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
 if (window.location.pathname === '/notes') {
+  noteIdLoc = document.querySelector('.note-id');
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
@@ -54,11 +56,14 @@ const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
+    noteIdLoc.setAttribute('readonly', true)
+    //noteTitle.setAttribute('readonly', true);
+    //noteText.setAttribute('readonly', true);
+    noteIdLoc.value = activeNote.id
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
+    noteIdLoc.value = '';
     noteTitle.value = '';
     noteText.value = '';
   }
@@ -66,6 +71,7 @@ const renderActiveNote = () => {
 
 const handleNoteSave = () => {
   const newNote = {
+    id: noteIdLoc.value,
     title: noteTitle.value,
     text: noteText.value,
   };
@@ -82,13 +88,15 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
-  console.log("note",note)
+
+  //console.log("note",note,noteId)
 
   if (activeNote.id === noteId) {
     activeNote = {};
   }
 
   deleteNote(noteId).then(() => {
+    console.log("note deleted");
     getAndRenderNotes();
     renderActiveNote();
   });
