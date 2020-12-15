@@ -36,7 +36,9 @@ Users will be able to Add, Delete and Change exisiting notes.
 * To open the note click on the cell containing the note
 * Click on the upper right hand pencil to edit or add a note
 * To save the note click on the upper left icon that resembles an older disk to save - this icon will only appear if a note has been updated or if the new note contains both title and text.
+
 ![](./images/NoteTakerIcon.gif)
+
 * Afer a note has been saved (applies to changed and new) the note will be added to the end of list of notes on the left column
 * Post save on the left column the user will have a new Note screen
 * To delete a note click on the trash can icon with the note

@@ -37,6 +37,22 @@ router.get("/notes", (req, res) => {
   });
 
 
+router.get("/notes/:id", (req, res) => { 
+    console.log(req.params);  
+    const search = req.params.id;
+    fs.readFile(db,'utf8', (err,data) => {
+      if (err) throw err;
+      const allNotes = JSON.parse(data);
+      for (let i = 0; i < allNotes.length; i++) {
+          if (allNotes[i].id === search) {
+            res.json(allNotes[i])
+          }
+        }
+    })
+}) 
+
+
+
 router.delete("/notes/:id", (req, res) => { 
     console.log(req.params);  
     const search = req.params.id;
@@ -45,6 +61,7 @@ router.delete("/notes/:id", (req, res) => {
         const allNotes = JSON.parse(data);
         for (let i = 0; i < allNotes.length; i++) {
             if (allNotes[i].id === search) {
+                //Splice from the current array spot for one element
                 let removed = allNotes.splice(i, 1) 
                 fs.writeFile(db, JSON.stringify(allNotes), (err) => {
                     if (err) throw err;
@@ -58,15 +75,13 @@ router.delete("/notes/:id", (req, res) => {
 
 
 router.post('/notes', (req,res) => {
+    console.log(req.body)
     let noteid;
     let allNotes;
     fs.readFile(db,'utf8', (err,data) => {
     if (err) throw err;
      allNotes = JSON.parse(data);
-    
      let formNoteID = req.body.id;
-
-  
      //if there is a form id remove it from the array
             if(formNoteID){
               for (let i = 0; i < allNotes.length; i++) {
@@ -99,4 +114,4 @@ router.post('/notes', (req,res) => {
 
     
 
-module.exports =router;
+module.exports = router;
