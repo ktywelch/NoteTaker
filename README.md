@@ -13,6 +13,7 @@ The application has been deployed to Heroku.
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [Technologies](#Technologies)
+* [Testing](#Testing)
 * [Contributions](#Contributions)
 * [License](#License)
 ## Installation
@@ -52,6 +53,14 @@ The application was created using several opensource technologies used in develo
 * node.js
 * npm and modules express,fs,nanoid
 * bootstrap for styling
+
+## Testing
+To test the script run "npm test" from the Develop directory - these tests will add a new note that contains the the followin: 
+      id: '9999',
+      title: 'Balance accounts',
+      text: 'Balance account books by end of day Monday'
+
+When he test queires for id 9999 the above will be returned.
 
 ## Contributions
 Recognizing contributors and sites that helped in development:
