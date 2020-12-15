@@ -55,7 +55,9 @@ The application was created using several opensource technologies used in develo
 * bootstrap for styling
 
 ## Testing
-To test the script run "npm test" from the Develop directory - these tests will add a new note that contains the the followin: 
+To test the script run "npm test" from the Develop directory. The tests is using jest and supertest as described in this article [Testing Routes and Controllers](https://www.theodinproject.com/courses/nodejs/lessons/testing-routes-and-controllers)
+
+The test suite will add a new note that contains the the following: 
       id: '9999',
       title: 'Balance accounts',
       text: 'Balance account books by end of day Monday'
