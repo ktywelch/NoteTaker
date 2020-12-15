@@ -39,15 +39,19 @@ router.get("/notes", (req, res) => {
 
 router.get("/notes/:id", (req, res) => { 
     console.log(req.params);  
+    let rsp;
     const search = req.params.id;
     fs.readFile(db,'utf8', (err,data) => {
       if (err) throw err;
       const allNotes = JSON.parse(data);
       for (let i = 0; i < allNotes.length; i++) {
           if (allNotes[i].id === search) {
-            res.json(allNotes[i])
+            rsp = allNotes[i]
+          } else {
+            rsp = {msg: "is no longer in the file"}
           }
         }
+    res.json(rsp);
     })
 }) 
 
