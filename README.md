@@ -51,7 +51,7 @@ The application was created using several opensource technologies used in develo
 
 * VSCode
 * node.js
-* npm and modules express,fs,nanoid
+* npm and modules express, fs, nanoid, supertest, jest
 * bootstrap for styling
 
 ## Testing
@@ -73,6 +73,7 @@ Recognizing contributors and sites that helped in development:
 * Sam Ayler 
 * Vincent Gines 
 * Lucah Endicott
+* www.theodinproject.com (testing express)
 
 ## License
 MIT
