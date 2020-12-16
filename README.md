@@ -30,7 +30,7 @@ The installation pocess is a download of git source, using npm install to instal
 Users will be able to Add, Delete and Change exisiting notes. 
 
 * If intalled locally start use the link:
-    * [localhost:800](http://localhost:8000)
+    * [localhost:8000](http://localhost:8000)
     * [https://notetaker-ktywelch-2020.herokuapp.com/](https://notetaker-ktywelch-2020.herokuapp.com/)
 * Click on the "GetStarted" button
 * The existing notes will be seen on the column on the left side
